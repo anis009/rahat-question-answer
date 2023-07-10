@@ -2,15 +2,20 @@ import express from "express";
 import mongoose from "mongoose";
 import bluebird from "bluebird";
 import bodyParser from "body-parser";
-
 import config from "./config/index.js";
-
 import authRouter from "./routes/auth.js";
-
+import globalErrorHandler from "./middleware/globalErrorHandler.js";
+import httpStatus from "http-status";
+import { ApiError } from "./errors/ApiError.js";
+import colors from "colors";
+import morgan from "morgan";
 const app = express();
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
+if (config.NODE_ENV === "DEV") {
+	app.use(morgan("dev"));
+}
 
 // Connect to MongoDB
 mongoose.Promise = bluebird;
@@ -20,14 +25,8 @@ const mongooseOptions = {
 	useUnifiedTopology: true,
 };
 
-await mongoose.connect(
-	config.MONGODB_URI,
-	mongooseOptions
-	// () => {
-	//   console.log('MongoDB connected successfully!')
-	//   console.log("Press CTRL-C to stop\n-----------------------------------------------------------------\n\n");
-	// },
-);
+await mongoose.connect(config.MONGODB_URI, mongooseOptions);
+console.log("Mongoose connected to MongoDB".green.underline);
 
 // CORs Handling
 app.use((req, res, next) => {
@@ -54,8 +53,8 @@ app.use((req, res, next) => {
 
 app.use("/api/auth", authRouter);
 
-app.get("/", async (req, res) => {
-	res.send("Hello, world!");
+app.get("/", async (req, res, next) => {
+	res.send("Hello, " + req);
 });
 
 app.post(
@@ -67,5 +66,21 @@ app.post(
 		});
 	})
 );
+
+app.use(globalErrorHandler);
+
+app.use((req, res, next) => {
+	res.status(httpStatus.NOT_FOUND).json({
+		success: false,
+		message: "Not Found",
+		errorMessages: [
+			{
+				path: req.originalUrl,
+				message: "Api Not Found",
+			},
+		],
+	});
+	//next();
+});
 
 export default app;
