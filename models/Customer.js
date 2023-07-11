@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import orderSchema from "./Order";
 const customerSchema = new mongoose.Schema(
 	{
 		customerName: {
@@ -15,7 +14,13 @@ const customerSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		orders: [orderSchema],
+		orders: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Order",
+				required: false,
+			},
+		],
 	},
 	{
 		timestamps: true,
