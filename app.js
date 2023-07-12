@@ -9,6 +9,7 @@ import httpStatus from "http-status";
 import { ApiError } from "./errors/ApiError.js";
 import colors from "colors";
 import morgan from "morgan";
+import { customerRoute } from "./routes/customer.js";
 const app = express();
 
 app.use(bodyParser.json());
@@ -52,6 +53,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/auth", authRouter);
+app.use("/api/customer", customerRoute);
 
 app.get("/", async (req, res, next) => {
 	res.send("Hello, " + req);
