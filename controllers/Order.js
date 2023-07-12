@@ -3,10 +3,13 @@ import Order from "../models/Order.js";
 import catchAsync from "../shared/catchAsync.js";
 import { responseObj } from "../shared/response.js";
 import { ApiError } from "../errors/ApiError.js";
+import { getLastOrderId } from "../utils/getLastOrderId.js";
 
 export const createOrder = catchAsync(async (req, res) => {
 	const order = req.body;
-	const orderSaved = await Order.create(order);
+	const orderId = await getLastOrderId();
+	const createdData = { orderId, ...order };
+	const orderSaved = await Order.create(createdData);
 	const result = responseObj(
 		httpStatus.CREATED,
 		"order created successfully",
