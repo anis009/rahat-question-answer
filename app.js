@@ -50,7 +50,7 @@ app.post(('/test', async (req, res) => {
 	res.json({
 		success: true
 	})
-);
+}));
 
 app.use(globalErrorHandler);
 
