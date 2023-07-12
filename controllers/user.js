@@ -2,13 +2,13 @@ import generateToken from '../utils/generateToken.js'
 import User from '../models/User.js'
 
 const authUser = async (req, res) => {
-  const { email, password } = req.body
+  const { username, password } = req.body
 
-  const user = await User.findOne({ email })
+  const user = await User.findOne({ username })
   if (user && (await user.validPassword(password))) {
     res.json({
       _id: user._id,
-      name: user.name,
+      username: username,
       email: user.email,
       token: generateToken(user._id),
     })
@@ -21,9 +21,9 @@ const authUser = async (req, res) => {
 }
 
 const registerUser = async (req, res) => {
-  const { name, email, password } = req.body
+  const { username, email, password } = req.body
   console.log('registerUser req.body: ', req.body)
-  if (!email || !password) {
+  if (!username || !password) {
     return res.status(400).json({
       success: false,
       message: 'Invalid User Data'
@@ -41,7 +41,7 @@ const registerUser = async (req, res) => {
   }
   
   const user = new User({
-    name,
+    username,
     email,
   })
   user.setPassword(password)
@@ -50,7 +50,7 @@ const registerUser = async (req, res) => {
   if (user) {
     res.status(201).json({
       _id: user._id,
-      name: user.name,
+      username: user.username,
       email: user.email,
       token: generateToken(user._id),
     })
