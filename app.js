@@ -50,6 +50,7 @@ app.use((req, res, next) => {
 
 app.use('/api/auth', authRouter)
 
+
 app.get("/", async (req, res) => {
 	res.send("Hello, world!");
 });
