@@ -1,4 +1,6 @@
 # Nuriya-Tailers-Back-End
+### Customer API
+1.  https://nuriya-tailers-backend.vercel.app/api/customers (create customer) POST
 ### Order Api
 1. https://nuriya-tailers-backend.vercel.app/api/orders/ (create order) POST 
 1. https://nuriya-tailers-backend.vercel.app/api/orders/ (get all orders) GET 
