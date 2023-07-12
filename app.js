@@ -38,19 +38,18 @@ app.get("/", async (req, res, next) => {
 	res.send("HELLO SERVER");
 });
 
-app.use('/api/auth', authRouter)
-
+app.use("/api/auth", authRouter);
 
 app.get("/", async (req, res) => {
 	res.send("Hello, world!");
 });
 
-app.post(('/test', async (req, res) => {
-	console.log('req.body: ', req.body)
+app.post("/test", async (req, res) => {
+	console.log("req.body: ", req.body);
 	res.json({
-		success: true
-	})
-}));
+		success: true,
+	});
+});
 
 app.use(globalErrorHandler);
 
