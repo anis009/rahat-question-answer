@@ -8,7 +8,7 @@ export const createCustomer = catchAsync(async (req, res) => {
 	const savedCustomer = await Customer.create(customer);
 
 	const result = responseObj(
-		httpStatus.OK,
+		httpStatus.CREATED,
 		"Customer is created successfully",
 		savedCustomer
 	);

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
 const orderSchema = new Schema(
 	{
@@ -34,7 +34,6 @@ const orderSchema = new Schema(
 		},
 		clothType: {
 			type: String,
-			enum: [""],
 			required: true,
 		},
 		lomba: {
@@ -196,6 +195,6 @@ const orderSchema = new Schema(
 	}
 );
 
-const Order = mongoose.mode("Order", orderSchema);
+const Order = mongoose.model("Order", orderSchema);
 
 export default Order;
