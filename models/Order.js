@@ -2,6 +2,11 @@ import mongoose, { Schema } from "mongoose";
 
 const orderSchema = new Schema(
 	{
+		orderId: {
+			type: String,
+			required: true,
+			unique: true,
+		},
 		orderNote: {
 			type: String,
 			required: true,

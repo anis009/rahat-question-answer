@@ -12,6 +12,7 @@ import morgan from "morgan";
 import { customerRoute } from "./routes/customer.js";
 import { orderRoute } from "./routes/order.js";
 import cors from "cors";
+import Order from "./models/Order.js";
 const app = express();
 
 app.use(bodyParser.json());
@@ -29,7 +30,12 @@ app.use("/api/customers", customerRoute);
 app.use("/api/orders", orderRoute);
 
 app.get("/", async (req, res, next) => {
-	res.send("Hello Server");
+	// 	res.send(id);
+	// };
+
+	// getLastOrderId();
+
+	res.send("HELLO SERVER");
 });
 
 app.post(
