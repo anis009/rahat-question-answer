@@ -1,7 +1,5 @@
 import mongoose from "mongoose";
-import app from "./app.js";
-import config from "./config/index.js";
-import colors from "colors";
+import config from "./index.js";
 
 const connectDB = async () => {
 	try {
@@ -10,12 +8,10 @@ const connectDB = async () => {
 		console.log(
 			`MongoDB Connected: ${conn.connection.host}🔥🔥🔥🚀🚀`.green.underline
 		);
-		app.listen(config.port, () => {
-			console.log(`Server listening on ${config.port}`.yellow.underline);
-		});
 	} catch (err) {
 		console.error(`Error:${err.message}`.red.underline.bold);
 		process.exit(1);
 	}
 };
-connectDB();
+
+export default connectDB;
