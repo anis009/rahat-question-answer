@@ -31,7 +31,7 @@ const orderSchema = new Schema(
 		orderStatus: {
 			type: String,
 			enum: ["pending", "delivered", "done"],
-			required: true,
+			default: "pending",
 		},
 		clothName: {
 			type: String,
@@ -45,7 +45,6 @@ const orderSchema = new Schema(
 			type: String,
 			required: false,
 		},
-
 		payerMuhri: {
 			type: String,
 			required: false,
