@@ -34,7 +34,10 @@ export const updateOrder = catchAsync(async (req, res) => {
 
 export const getSingleOrder = catchAsync(async (req, res) => {
 	const orderId = req.params.id;
-	const order = await Order.findById(orderId);
+	const order = await Order.findById(orderId).populate({
+		path: "customerId",
+		model: "Customer",
+	});
 
 	if (!order) {
 		throw new ApiError(httpStatus.NOT_FOUND, "Order not found");
@@ -65,8 +68,11 @@ export const deleteOrder = catchAsync(async (req, res) => {
 });
 
 export const getAllOrders = catchAsync(async (req, res) => {
-	const orders = await Order.find();
-	console.log(orders);
+	const orders = await Order.find().populate({
+		path: "customerId",
+		model: "Customer",
+	});
+	// console.log(orders);
 	const result = responseObj(
 		httpStatus.OK,
 		"Orders retrieved successfully",

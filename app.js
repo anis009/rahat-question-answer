@@ -38,8 +38,6 @@ app.get("/", async (req, res, next) => {
 	res.send("HELLO SERVER");
 });
 
-app.use("/api/auth", authRouter);
-
 app.get("/", async (req, res) => {
 	res.send("Hello, world!");
 });
