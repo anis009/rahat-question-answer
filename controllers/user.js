@@ -3,6 +3,12 @@ import User from '../models/User.js'
 
 const authUser = async (req, res) => {
   const { username, password } = req.body
+  if (!username || !password) {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid Login Data'
+    })
+  }
 
   const user = await User.findOne({ username })
   if (user && (await user.validPassword(password))) {
