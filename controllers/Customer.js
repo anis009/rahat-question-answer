@@ -91,7 +91,7 @@ export const deleteCustomer = catchAsync(async (req, res) => {
 });
 
 export const getAllCustomers = catchAsync(async (req, res) => {
-	const customers = await Customer.find();
+	const customers = await Customer.find().sort({ createdAt: -1 });
 	console.log(customers);
 	const result = responseObj(
 		httpStatus.OK,
