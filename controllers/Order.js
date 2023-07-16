@@ -4,6 +4,7 @@ import catchAsync from "../shared/catchAsync.js";
 import { responseObj } from "../shared/response.js";
 import { ApiError } from "../errors/ApiError.js";
 import { getLastOrderId } from "../utils/getLastOrderId.js";
+import { formatUpdateData } from "../shared/formatUpdateData.js";
 
 export const createOrder = catchAsync(async (req, res) => {
 	const order = req.body;
@@ -32,6 +33,32 @@ export const updateOrder = catchAsync(async (req, res) => {
 	res.json(result);
 });
 
+export const updateOrderCloth = catchAsync(async (req, res) => {
+	const data = req.body;
+	const updateData = formatUpdateData(data);
+	// console.log(updateData);
+	const orderId = req.params.orderId;
+	const clothId = req.params.clothId;
+
+	const updatedData = await Order.findOneAndUpdate(
+		{
+			_id: orderId,
+			"clothList._id": clothId,
+		},
+		{
+			$set: updateData,
+		},
+		{ new: true }
+	);
+
+	const result = responseObj(
+		httpStatus.CREATED,
+		"Order updated successfully",
+		updatedData
+	);
+	res.json(result);
+});
+
 export const getSingleOrder = catchAsync(async (req, res) => {
 	const orderId = req.params.id;
 	const order = await Order.findById(orderId).populate({
@@ -51,6 +78,28 @@ export const getSingleOrder = catchAsync(async (req, res) => {
 	res.json(result);
 });
 
+export const deleteOrderCloth = catchAsync(async (req, res) => {
+	const orderId = req.params.orderId;
+	const clothId = req.params.clothId;
+	const updatedData = await Order.findOneAndUpdate(
+		{
+			_id: orderId,
+		},
+		{
+			$pull: {
+				clothList: { _id: clothId },
+			},
+		},
+		{ new: true }
+	);
+
+	const result = responseObj(
+		httpStatus.OK,
+		"Cloth deleted successfully",
+		updatedData
+	);
+	res.json(result);
+});
 export const deleteOrder = catchAsync(async (req, res) => {
 	const orderId = req.params.id;
 	const deletedOrder = await Order.findByIdAndDelete(orderId);
@@ -68,10 +117,12 @@ export const deleteOrder = catchAsync(async (req, res) => {
 });
 
 export const getAllOrders = catchAsync(async (req, res) => {
-	const orders = await Order.find().populate({
-		path: "customerId",
-		model: "Customer",
-	});
+	const orders = await Order.find()
+		.populate({
+			path: "customerId",
+			model: "Customer",
+		})
+		.sort({ createdAt: -1 });
 	// console.log(orders);
 	const result = responseObj(
 		httpStatus.OK,

@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
-if (config.NODE_ENV === "DEV") {
+if (config.NODE_ENV === "PROD") {
 	app.use(morgan("dev"));
 }
 
