@@ -30,6 +30,14 @@ export const ClothSchema = new mongoose.Schema(
 			type: String,
 			required: false,
 		},
+		kop:{
+			type: String,
+			required: false,
+		},
+		isOnePocket:{
+			type: Boolean,
+			default: false,
+		},
 		puut: {
 			type: String,
 			required: false,
@@ -37,6 +45,18 @@ export const ClothSchema = new mongoose.Schema(
 		body: {
 			type: String,
 			required: false,
+		},
+		ranerLuj: {
+			type: String,
+			default: "",
+		},
+		churiHata: {
+			type: String,
+			default: "",
+		},
+		isPichonePocket: {
+			type: Boolean,
+			default: false,
 		},
 		hata: {
 			type: String,
