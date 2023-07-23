@@ -8,7 +8,7 @@ export const ClothSchema = new mongoose.Schema(
 		},
 		clothType: {
 			type: String,
-			required: true,
+			required: false,
 		},
 		clothQuantity: {
 			type: Number,
@@ -52,11 +52,11 @@ export const ClothSchema = new mongoose.Schema(
 		},
 		ranerLuj: {
 			type: String,
-			default: "",
+			required: false,
 		},
 		churiHata: {
 			type: String,
-			default: "",
+			required: false,
 		},
 		isPichonePocket: {
 			type: Boolean,
@@ -76,119 +76,119 @@ export const ClothSchema = new mongoose.Schema(
 		},
 		isPoket: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isChain: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isMotaShuta: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isDoubleSelai: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isMotaRabar: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		is2Pocket: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isMobilePocket: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isBendRoundColar: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isKotiColar: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isDoublePlate: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isRoundcolar: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isSinglePlate: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isFull: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isSamna: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isColar: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isMura: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isHata: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isKop: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isSidePocket: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isKandi: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isFullBodySita: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isColarSingle: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isColarDouble: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isSamnaSita: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isGolGola: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isOneChain: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		isOneGuntiDana: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		is3GuntiDana: {
 			type: Boolean,
-			required: false,
+			default: false,
 		},
 		price: {
 			type: Number,
-			required: false,
+			default: 0,
 		},
 	},
 	{

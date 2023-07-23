@@ -10,21 +10,28 @@ const orderSchema = new Schema(
 		},
 		orderNote: {
 			type: String,
-			required: true,
+			required: false,
 		},
-		customerId: {
-			type: Schema.Types.ObjectId,
-			ref: "Customer",
-			required: true,
+		customerName: {
+			type: String,
+			required: false,
+		},
+		customerPhone: {
+			type: String,
+			required: false,
+		},
+		customerLocation: {
+			type: String,
+			required: false,
 		},
 		clothList: [ClothSchema],
 		paidAmount: {
 			type: Number,
-			required: true,
+			default: 0,
 		},
 		estimatedDeliveryTime: {
 			type: Date,
-			required: true,
+			required: null,
 		},
 		deliveredOn: {
 			type: Date,
