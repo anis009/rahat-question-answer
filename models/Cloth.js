@@ -30,11 +30,15 @@ export const ClothSchema = new mongoose.Schema(
 			type: String,
 			required: false,
 		},
-		kop:{
+		kop: {
 			type: String,
 			required: false,
 		},
-		isOnePocket:{
+		isOnePocket: {
+			type: Boolean,
+			default: false,
+		},
+		isTwoPocketChain: {
 			type: Boolean,
 			default: false,
 		},

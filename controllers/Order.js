@@ -5,6 +5,8 @@ import { responseObj } from "../shared/response.js";
 import { ApiError } from "../errors/ApiError.js";
 import { getLastOrderId } from "../utils/getLastOrderId.js";
 import { formatUpdateData } from "../shared/formatUpdateData.js";
+import Customer from "../models/Customer.js";
+import mongoose from "mongoose";
 
 export const createOrder = catchAsync(async (req, res) => {
 	const order = req.body;
@@ -61,21 +63,54 @@ export const updateOrderCloth = catchAsync(async (req, res) => {
 
 export const getSingleOrder = catchAsync(async (req, res) => {
 	const orderId = req.params.id;
-	const order = await Order.findById(orderId).populate({
-		path: "customerId",
-		model: "Customer",
-	});
 
-	if (!order) {
-		throw new ApiError(httpStatus.NOT_FOUND, "Order not found");
+	// Create a new session using `startSession`
+	const session = await mongoose.startSession();
+
+	try {
+		// Start a transaction for the session
+		session.startTransaction();
+
+		// Retrieve the order from the database within the transaction
+		const order = await Order.findById(orderId).session(session);
+
+		// If the order is not found, throw an error to be caught by the catch block
+		if (!order) {
+			throw new ApiError(httpStatus.NOT_FOUND, "Order not found");
+		}
+
+		// Retrieve the customer information for the order from the database within the transaction
+		const customer = await Customer.findById(order.customerId)
+			.select({
+				customerName: 1,
+				customerPhone: 1,
+				customerLocation: 1,
+			})
+			.session(session);
+
+		// Commit the transaction after all operations have completed successfully
+		await session.commitTransaction();
+
+		// Combine the order and customer data if needed
+		const combinedData = { ...customer.toObject(), ...order.toObject() };
+
+		// Prepare the response object
+		const result = responseObj(
+			httpStatus.OK,
+			"Order retrieved successfully",
+			combinedData
+		);
+
+		// Send the response to the client
+		res.json(result);
+	} catch (error) {
+		// If an error occurs during the transaction, catch it and handle appropriately
+		await session.abortTransaction();
+		throw error;
+	} finally {
+		// Finally, end the session
+		session.endSession();
 	}
-
-	const result = responseObj(
-		httpStatus.OK,
-		"Order retrieved successfully",
-		order
-	);
-	res.json(result);
 });
 
 export const deleteOrderCloth = catchAsync(async (req, res) => {
@@ -121,13 +156,25 @@ export const getAllOrders = catchAsync(async (req, res) => {
 		.populate({
 			path: "customerId",
 			model: "Customer",
+			select: "-_id",
 		})
-		.sort({ createdAt: -1 });
+		.sort({ createdAt: -1 })
+		.lean();
+	const temp = [];
+
+	orders.forEach((order) => {
+		const { customerId, ...others } = order;
+		temp.push({
+			...customerId,
+			...others,
+		});
+	});
+
 	// console.log(orders);
 	const result = responseObj(
 		httpStatus.OK,
 		"Orders retrieved successfully",
-		orders
+		temp
 	);
 	res.json(result);
 });
