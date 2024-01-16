@@ -11,18 +11,23 @@ const orderSchema = new Schema(
 		orderNote: {
 			type: String,
 			required: false,
+			default: "", // Added default value as an empty string
 		},
 		customerName: {
 			type: String,
 			required: false,
+			default: "", // Added default value as an empty string
 		},
 		customerPhone: {
 			type: String,
 			required: false,
+			unique: false,
+			default: "", // Added default value as an empty string
 		},
 		customerLocation: {
 			type: String,
 			required: false,
+			default: "", // Added default value as an empty string
 		},
 		clothList: [ClothSchema],
 		paidAmount: {
@@ -31,7 +36,7 @@ const orderSchema = new Schema(
 		},
 		estimatedDeliveryTime: {
 			type: Date,
-			required: null,
+			default: null,
 		},
 		deliveredOn: {
 			type: Date,

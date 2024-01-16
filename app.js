@@ -13,21 +13,23 @@ import { customerRoute } from "./routes/customer.js";
 import { orderRoute } from "./routes/order.js";
 import cors from "cors";
 import Order from "./models/Order.js";
+import questionsRouter from "./routes/question.js";
 const app = express();
 
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
-if (config.NODE_ENV === "PROD") {
+if (config.NODE_ENV === "development") {
 	app.use(morgan("dev"));
 }
 
 // Connect to MongoDB
 
-app.use("/api/auth", authRouter);
+app.use("/api/v1/auth", authRouter);
 app.use("/api/customers", customerRoute);
 app.use("/api/orders", orderRoute);
+app.use("/api/v1/questions", questionsRouter);
 
 app.get("/", async (req, res, next) => {
 	// 	res.send(id);

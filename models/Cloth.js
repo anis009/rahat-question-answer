@@ -4,34 +4,65 @@ export const ClothSchema = new mongoose.Schema(
 	{
 		clothName: {
 			type: String,
+			default: "",
 			required: false,
 		},
 		clothType: {
 			type: String,
+			default: "",
+
 			required: false,
 		},
 		clothQuantity: {
 			type: Number,
 			default: 1,
 		},
+		luj: {
+			type: String,
+			default: "",
+
+			required: false,
+		},
+		gher: {
+			type: String,
+			default: "",
+
+			required: false,
+		},
 		lomba: {
 			type: String,
+			default: "",
+
 			required: false,
 		},
 		payerMuhri: {
 			type: String,
+			default: "",
+
+			required: false,
+		},
+		bookPocket: {
+			type: String,
+			default: "",
+
 			required: false,
 		},
 		hatarMuhri: {
 			type: String,
+			default: "",
+
 			required: false,
 		},
 		hiegh: {
 			type: String,
+			default: "",
+
 			required: false,
 		},
 		kop: {
 			type: String,
+			default: "",
+
 			required: false,
 		},
 		isOnePocket: {
@@ -44,18 +75,26 @@ export const ClothSchema = new mongoose.Schema(
 		},
 		puut: {
 			type: String,
+			default: "",
+
 			required: false,
 		},
 		body: {
 			type: String,
+			default: "",
+
 			required: false,
 		},
 		ranerLuj: {
 			type: String,
+			default: "",
+
 			required: false,
 		},
 		churiHata: {
 			type: String,
+			default: "",
+
 			required: false,
 		},
 		isPichonePocket: {
@@ -64,14 +103,19 @@ export const ClothSchema = new mongoose.Schema(
 		},
 		hata: {
 			type: String,
+			default: "",
+
 			required: false,
 		},
 		kolarToyri: {
 			type: String,
+			default: "",
+
 			required: false,
 		},
 		komor: {
 			type: String,
+			default: "",
 			required: false,
 		},
 		isPoket: {
