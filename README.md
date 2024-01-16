@@ -1,24 +1,22 @@
-# Nuriya-Tailers-Back-End
+# Rahat question and answers
 
 ### Auth API
 
-1. https://nuriya-tailers-backend.vercel.app/api/auth/ (Register user) POST body=>name,email,password <br/>
-2. https://nuriya-tailers-backend.vercel.app/api/auth/login (login user) POST body=>email,password
+1. https://rahat-question-answer.vercel.app/api/v1/auth/ (Register user) POST body=>name,email,password <br/>
+2. https://rahat-question-answer.vercel.app/api/v1/auth/login (login user) POST body=>email,password
 
-### Customer API
+### Question API
 
-1.  https://nuriya-tailers-backend.vercel.app/api/customers (create) POST
-2.  https://nuriya-tailers-backend.vercel.app/api/customers (get all) GET
-3.  https://nuriya-tailers-backend.vercel.app/api/customers/:customerId (get by id) GET
-4.  https://nuriya-tailers-backend.vercel.app/api/customers/:customerId (update by id) PATCH
-5.  https://nuriya-tailers-backend.vercel.app/api/customers/:customerId (delete by id) DELETE
+1.  https://rahat-question-answer.vercel.app/api/v1/questions (create) POST
+1.  https://rahat-question-answer.vercel.app/api/v1/questions/votes/id (create question upvotes and downvotes) POST
+`
+{
+"type":"upvote",
+"email":"anis.cse5.bu@gmail.com"
+}
+`
+3.  https://rahat-question-answer.vercel.app/api/v1/questions (get all) GET
+4.  https://rahat-question-answer.vercel.app/api/v1/questions/:qid (get by id) GET
+5.  https://rahat-question-answer.vercel.app/api/v1/questions/:qid (update by id) PATCH
+6.  https://rahat-question-answer.vercel.app/api/v1/questions/:qid (delete by id) DELETE
 
-### Order Api
-
-1. https://nuriya-tailers-backend.vercel.app/api/orders/ (create) POST
-1. https://nuriya-tailers-backend.vercel.app/api/orders/ (get all) GET
-1. https://nuriya-tailers-backend.vercel.app/api/orders/:orderId (get by id) GET
-1. https://nuriya-tailers-backend.vercel.app/api/orders/:orderId (update by id) PATCH
-1. https://nuriya-tailers-backend.vercel.app/api/orders/:orderId (delete by id) DELETE
-1. https://nuriya-tailers-backend.vercel.app/api/orders/cloths/:orderId/:clothId (update cloth id) PATCH
-1. https://nuriya-tailers-backend.vercel.app/api/orders/cloths/:orderId/:clothId (delete cloth id) DELETE
