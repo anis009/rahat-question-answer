@@ -48,6 +48,23 @@ for downvote
 "email":"anis.cse5.bu@gmail.com"
 }
 ```
+1.  https://rahat-question-answer.vercel.app/api/v1/questions/replies/votes/:qid/:aid/:rid (create replies upvotes and downvotes) METHOD POST
+   
+  ```
+for upvote
+{
+"type":"upvote",
+"email":"anis.cse5.bu@gmail.com"
+}
+
+for downvote
+{
+"type":"downvote",
+"email":"anis.cse5.bu@gmail.com"
+}
+```
+
+
 
 3.  https://rahat-question-answer.vercel.app/api/v1/questions (get all) GET
 4.  https://rahat-question-answer.vercel.app/api/v1/questions/:qid (get by id) GET
